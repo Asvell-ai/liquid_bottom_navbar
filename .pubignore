@@ -1,0 +1,15 @@
+.dart_tool/
+.idea/
+.pub/
+build/
+coverage/
+android/
+ios/
+linux/
+macos/
+web/
+windows/
+tool/
+*.iml
+pubspec.lock
+example/pubspec.lock

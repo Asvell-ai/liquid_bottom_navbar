@@ -1,0 +1,28 @@
+name: liquid_bottom_nav_bar
+description: iOS-inspired liquid style bottom navigation bar with drag support, glass blur option, and flexible styling.
+version: 0.1.0
+homepage: https://github.com/asadulloh/liquid_bottom_nav_bar
+repository: https://github.com/asadulloh/liquid_bottom_nav_bar
+issue_tracker: https://github.com/asadulloh/liquid_bottom_nav_bar/issues
+topics:
+  - navigation
+  - bottom-navigation
+  - liquid
+  - navbar
+  - flutter
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.22.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
