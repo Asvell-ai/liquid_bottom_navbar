@@ -7,7 +7,7 @@ An iOS-inspired liquid bottom navigation bar for Flutter with smooth tap animati
 Here's how the default **Liquid Bottom NavBar** looks 👇
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/asadulloh/liquid_bottom_nav_bar/main/assets/navbar.gif" width="350" alt="Liquid bottom navigation bar demo" />
+  <img src="https://raw.githubusercontent.com/Asvell-ai/liquid_bottom_navbar/main/assets/navbar.gif" width="350" alt="Liquid bottom navigation bar demo" />
 </p>
 
 ## ✨ Features

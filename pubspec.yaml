@@ -1,9 +1,9 @@
 name: liquid_bottom_nav_bar
 description: iOS-inspired liquid style bottom navigation bar with drag support, glass blur option, and flexible styling.
 version: 0.1.0
-homepage: https://github.com/asadulloh/liquid_bottom_nav_bar
-repository: https://github.com/asadulloh/liquid_bottom_nav_bar
-issue_tracker: https://github.com/asadulloh/liquid_bottom_nav_bar/issues
+homepage: https://github.com/Asvell-ai/liquid_bottom_navbar
+repository: https://github.com/Asvell-ai/liquid_bottom_navbar
+issue_tracker: https://github.com/Asvell-ai/liquid_bottom_navbar/issues
 topics:
   - navigation
   - bottom-navigation
