@@ -49,6 +49,23 @@ class _DemoHomeState extends State<DemoHome> {
       icon: Icons.person_rounded,
       label: 'Profile',
     ),
+    // ─── Example: Image/SVG via iconWidget (simple) ───
+    // LiquidNavItem(
+    //   iconWidget: Image.asset('assets/home.png'),
+    //   label: 'Home',
+    // ),
+    //
+    // ─── Example: SVG tinting via iconBuilder (full control) ───
+    // LiquidNavItem(
+    //   icon: Icons.home, // fallback
+    //   iconBuilder: (isActive, progress, color) => SvgPicture.asset(
+    //     isActive ? 'assets/home_active.svg' : 'assets/home.svg',
+    //     color: color,
+    //     width: 20,
+    //     height: 20,
+    //   ),
+    //   label: 'Home',
+    // ),
   ];
 
   static const titles = ['Home', 'Search', 'Favorite', 'Profile'];
