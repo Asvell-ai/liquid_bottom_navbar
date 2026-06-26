@@ -169,13 +169,70 @@ LiquidBottomNavBar(
 
 ### LiquidNavItem
 
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `icon` | `IconData?` | Default icon. Required unless `iconBuilder` or `iconWidget` is provided. |
+| `activeIcon` | `IconData?` | Icon for active state. Falls back to `icon`. |
+| `inactiveIcon` | `IconData?` | Icon for inactive state. Falls back to `icon`. |
+| `label` | `String?` | Optional item label. |
+| `semanticLabel` | `String?` | Semantic label for accessibility. |
+| `iconWidget` | `Widget?` | Widget override. Takes priority over `icon`. |
+| `activeIconWidget` | `Widget?` | Widget for active state. |
+| `inactiveIconWidget` | `Widget?` | Widget for inactive state. |
+| `iconBuilder` | `LiquidNavIconBuilder?` | Full-control builder. Receives `(isActive, progress, color)`. Ignores all other icon fields. |
+
+Resolution priority (highest to lowest):
+
+1. `iconBuilder` — full control, receives state + color
+2. `activeIconWidget` / `inactiveIconWidget` — per-state widget
+3. `iconWidget` — shared widget fallback
+4. `activeIcon` / `inactiveIcon` (navbar-level callbacks) — `LiquidBottomNavBar.activeIcon` / `.inactiveIcon`
+5. `activeIcon` / `inactiveIcon` (item-level) — `IconData` override
+6. `icon` — default `IconData`
+
+## 🖼️ Using images or SVG
+
+You have three options, from simplest to most powerful:
+
+### Option A — Simple widget replacement (`iconWidget`)
+
+No color auto-application — your widget renders as-is:
+
 ```dart
-const LiquidNavItem(
-  icon: Icons.home_outlined,
-  activeIcon: Icons.home,
+LiquidNavItem(
+  iconWidget: Image.asset('assets/home.png'),
   label: 'Home',
 )
 ```
+
+### Option B — Per-state widget (`activeIconWidget` / `inactiveIconWidget`)
+
+```dart
+LiquidNavItem(
+  activeIconWidget: Image.asset('assets/home_active.png'),
+  inactiveIconWidget: Image.asset('assets/home.png'),
+  label: 'Home',
+)
+```
+
+### Option C — Full control with color (`iconBuilder`)
+
+Receive the lerped color so you can tint SVGs, images, or custom widgets:
+
+```dart
+LiquidNavItem(
+  icon: Icons.home, // fallback when iconBuilder is null
+  iconBuilder: (isActive, progress, color) => SvgPicture.asset(
+    isActive ? 'assets/home_active.svg' : 'assets/home.svg',
+    color: color,
+    width: 20,
+    height: 20,
+  ),
+  label: 'Home',
+)
+```
+
+The `progress` value (0.0→1.0) lets you create smooth custom transitions.
 
 ## 📄 License
 

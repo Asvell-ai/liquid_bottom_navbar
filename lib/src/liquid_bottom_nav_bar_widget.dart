@@ -409,13 +409,70 @@ class _LiquidBottomNavBarState extends State<LiquidBottomNavBar>
                                   distance < 0.6 ? (0.6 - distance) * 0.4 : 0.0;
                               final isSelected = index == safeIndex;
 
-                              final iconData = isSelected
-                                  ? (widget.activeIcon?.call(item) ??
-                                      item.activeIcon ??
-                                      item.icon)
-                                  : (widget.inactiveIcon?.call(item) ??
-                                      item.inactiveIcon ??
-                                      item.icon);
+                              final progress =
+                                  (1.0 - distance).clamp(0.0, 1.0);
+                              final lerpedColor = Color.lerp(
+                                style.inactiveIconColor,
+                                style.activeIconColor,
+                                progress,
+                              );
+
+                              Widget iconWidget;
+                              if (item.iconBuilder != null) {
+                                iconWidget = item.iconBuilder!(
+                                  isSelected,
+                                  progress,
+                                  lerpedColor!,
+                                );
+                              } else if (isSelected) {
+                                final w = item.activeIconWidget ??
+                                    item.iconWidget;
+                                if (w != null) {
+                                  iconWidget = SizedBox(
+                                    width: widget.iconSize,
+                                    height: widget.iconSize,
+                                    child: w,
+                                  );
+                                } else {
+                                  final iconData =
+                                      widget.activeIcon?.call(item) ??
+                                          item.activeIcon ??
+                                          item.icon;
+                                  if (iconData != null) {
+                                    iconWidget = Icon(
+                                      iconData,
+                                      size: widget.iconSize,
+                                      color: lerpedColor,
+                                    );
+                                  } else {
+                                    iconWidget = const SizedBox();
+                                  }
+                                }
+                              } else {
+                                final w = item.inactiveIconWidget ??
+                                    item.iconWidget;
+                                if (w != null) {
+                                  iconWidget = SizedBox(
+                                    width: widget.iconSize,
+                                    height: widget.iconSize,
+                                    child: w,
+                                  );
+                                } else {
+                                  final iconData =
+                                      widget.inactiveIcon?.call(item) ??
+                                          item.inactiveIcon ??
+                                          item.icon;
+                                  if (iconData != null) {
+                                    iconWidget = Icon(
+                                      iconData,
+                                      size: widget.iconSize,
+                                      color: lerpedColor,
+                                    );
+                                  } else {
+                                    iconWidget = const SizedBox();
+                                  }
+                                }
+                              }
 
                               return Expanded(
                                 child: GestureDetector(
@@ -435,16 +492,7 @@ class _LiquidBottomNavBarState extends State<LiquidBottomNavBar>
                                         child: Stack(
                                           clipBehavior: Clip.none,
                                           children: [
-                                            Icon(
-                                              iconData,
-                                              size: widget.iconSize,
-                                              color: Color.lerp(
-                                                style.inactiveIconColor,
-                                                style.activeIconColor,
-                                                (1.0 - distance)
-                                                    .clamp(0.0, 1.0),
-                                              ),
-                                            ),
+                                            iconWidget,
                                             if (_showBadge(index))
                                               Positioned(
                                                 right: -6,
